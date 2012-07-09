@@ -1,0 +1,32 @@
+#!/usr/bin/env python3
+#
+# Add a task to taskwarrior via email. Makes use of the taskw Python bindings.
+#
+# http://taskwarrior.org
+# https://github.com/ralphbean/taskw
+#
+# For use with procmail or maildrop. Example using maildrop's .mailfilter:
+#
+#
+#  if ($SIZE < 8192 && /^From:.*myaddress@example.com/ && /^To:.*taskwarrior@/)
+#  {
+#    log "add task via mail2taskwarrior"
+#    xfilter "devel/mail2taskwarrior/mail2taskwarrior"
+#    exit
+#  }
+#
+
+from taskw import TaskWarrior
+import time
+import email
+import fileinput
+
+msg_string = ""
+for line in fileinput.input():
+  msg_string += line
+
+msg = email.message_from_string(msg_string)
+subject = email.header.make_header(email.header.decode_header(msg.get("Subject")))
+
+w = TaskWarrior()
+w.task_add(str(subject), due=str(int(time.time())))
