@@ -20,5 +20,8 @@ for line in fileinput.input():
 msg = email.message_from_string(msg_string)
 subject = email.header.make_header(email.header.decode_header(msg.get("Subject")))
 
+tdesc = str(subject).strip()
+tdue = str(int(time.time()))
+
 w = TaskWarrior()
-w.task_add(str(subject), due=str(int(time.time())))
+w.task_add(tdesc, due=tdue)
