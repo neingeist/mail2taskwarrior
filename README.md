@@ -12,3 +12,14 @@ if ($SIZE < 8192 && /^From:.*myaddress@example.com/ && /^To:.*taskwarrior@/)
   exit
 }
 ~~~
+
+Make a RPM
+----------
+If needed:
+* Update version in `setup.py`
+* Commit
+* Tag
+* Push tags
+
+Make the RPM:
+* `python setup.py bdist_rpm`
