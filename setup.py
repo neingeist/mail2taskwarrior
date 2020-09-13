@@ -2,6 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='mail2taskwarrior',
+    version='1.0.0',
     url='https://github.com/neingeist/mail2taskwarrior',
     author='neingeist',
     author_email='neingeist@bl0rg.net',
